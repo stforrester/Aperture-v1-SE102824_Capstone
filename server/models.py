@@ -88,7 +88,7 @@ class Photo(db.Model, SerializerMixin):
     photo_price = db.Column(db.Float)
 
     # Establishes photo_shoot_id as a foreign key and creates relationship allowing a Photo's associated photo_shoot to be returned (One [photo_shoot] to Many [Photo])
-    photo_shoot_id = db.Column(db.Integer, db.ForeignKey('photo_shoots.id'))
+    photo_shoot_id = db.Column(db.Integer, db.ForeignKey('photo_shoots.id', ondelete='SET NULL')) # Because Photo Objects need to exist even if their parent photo_shoot is deleted (because the photo might be in a user's order) we set this photo_shoot foreign key equal to null upon the parents object's deletion
     photo_shoot = db.relationship('PhotoShoot', back_populates='photos')
 
     # Creates relationship allowing a Photo's associated order_items to be returned (One [Photo] to Many [order_items])
