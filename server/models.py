@@ -7,7 +7,7 @@ from config import db
 class User(db.Model, SerializerMixin):
     __tablename__ = 'users'
 
-    serialize_rules = ('-photo_shoots.user',)
+    serialize_rules = ('-orders.user', '-photo_shoots.user', )
 
     id = db.Column(db.Integer, primary_key=True)
     firstname = db.Column(db.String)
@@ -15,17 +15,36 @@ class User(db.Model, SerializerMixin):
     username = db.Column(db.String, unique=True)
     email = db.Column(db.String, unique=True)
     password = db.Column(db.String)
+    created_at = db.Column(db.DateTime, server_default=db.func.now())
+    updated_at = db.Column(db.DateTime, onupdate=db.func.now())
 
+    orders = db.relationship('Order', back_populates='user', cascade='all, delete-orphan')
     photo_shoots = db.relationship('PhotoShoot', back_populates='user', cascade='all, delete-orphan')
     
+    def __repr__(self):
+        return f'<User {self.id} {self.username}>'
+
+class Order(db.Model, SerializerMixin):
+    __tablename__ = 'orders'
+
+    serialize_rules = ('-user.orders',)
+
+    id = db.Column(db.Integer, primary_key=True)
+    order_date = db.Column(db.DateTime)
+    photo_quantity = db.Column(db.Integer)
+    order_price = db.Column(db.Float)
+    order_purchased = db.Column(db.Boolean)
+
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    user = db.relationship('User', back_populates='orders')
 
     def __repr__(self):
-        return f'<User {self.username}>'
+        return f'<Order {self.id} {self.order_purchaed}>'
 
 class PhotoShoot(db.Model, SerializerMixin):
     __tablename__ = 'photo_shoots'
 
-    serialize_rule = ('-users.photo_shoots',)
+    serialize_rules = ('-user.photo_shoots',)
 
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String)
@@ -35,6 +54,9 @@ class PhotoShoot(db.Model, SerializerMixin):
 
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     user = db.relationship('User', back_populates='photo_shoots')
+
+    def __repr__(self):
+        return f'<Photoshoot {self.id} {self.title}>'
 
 
     
