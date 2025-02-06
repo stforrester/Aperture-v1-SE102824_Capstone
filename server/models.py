@@ -44,7 +44,7 @@ class Order(db.Model, SerializerMixin):
 class PhotoShoot(db.Model, SerializerMixin):
     __tablename__ = 'photo_shoots'
 
-    serialize_rules = ('-user.photo_shoots',)
+    serialize_rules = ('-user.photo_shoots', '-photos.photo_shoot', )
 
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String)
@@ -55,8 +55,31 @@ class PhotoShoot(db.Model, SerializerMixin):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     user = db.relationship('User', back_populates='photo_shoots')
 
+    photos = db.relationship('Photo', back_populates='photo_shoot', cascade='save-update, merge')
+
     def __repr__(self):
         return f'<Photoshoot {self.id} {self.title}>'
+
+class Photo(db.Model, SerializerMixin):
+    __tablename__ = 'photos'
+
+    serialize_rules = ('-photo_shoot.photos',)
+
+    id = db.Column(db.Integer, primary_key=True)
+    cloudinary_link = db.Column(db.String)
+    photo_purchased = db.Column(db.Boolean)
+    photo_price = db.Column(db.Float)
+
+    photo_shoot_id = db.Column(db.Integer, db.ForeignKey('photo_shoots.id'))
+    photo_shoot = db.relationship('PhotoShoot', back_populates='photos')
+
+    def __repr__(self):
+        return f'<Photo {self.id} Cloudinary Link: {self.cloudinary_link}>'
+
+class OrderItem(db.Model, SerializerMixin):
+    __tablename__ = 'order_items'
+
+    serialize_rules = ('',)
 
 
     
