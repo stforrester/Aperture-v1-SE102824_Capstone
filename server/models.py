@@ -113,7 +113,7 @@ class OrderItem(db.Model, SerializerMixin):
     order = db.relationship('Order', back_populates='order_items')
     
     # Establishes photo_id as a foreign key an creates relationship allowing an OrderItem's associated photo to be returned (One [photo] to Many [OrderItem])
-    photo_id = db.Columne(db.Integer, db.ForeignKey('photos.id'))
+    photo_id = db.Column(db.Integer, db.ForeignKey('photos.id'))
     photo = db.relationship('Photo', back_populates='order_items')
 
     def __repr__(self):
