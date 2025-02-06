@@ -25,25 +25,6 @@ class User(db.Model, SerializerMixin):
     def __repr__(self):
         return f'<User {self.id} {self.username}>'
 
-class Order(db.Model, SerializerMixin):
-    __tablename__ = 'orders'
-
-    serialize_rules = ('-user.orders', '-order_items.order', )
-
-    id = db.Column(db.Integer, primary_key=True)
-    order_date = db.Column(db.DateTime)
-    photo_quantity = db.Column(db.Integer)
-    order_price = db.Column(db.Float)
-    order_purchased = db.Column(db.Boolean)
-
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    user = db.relationship('User', back_populates='orders')
-
-    order_items = db.relationship('OrderItem', back_populates='order', cascade='all, delete-orphan')
-
-    def __repr__(self):
-        return f'<Order {self.id} {self.order_purchaed}>'
-
 class PhotoShoot(db.Model, SerializerMixin):
     __tablename__ = 'photo_shoots'
 
@@ -63,6 +44,27 @@ class PhotoShoot(db.Model, SerializerMixin):
     def __repr__(self):
         return f'<PhotoShoot {self.id} {self.title}>'
 
+class Order(db.Model, SerializerMixin):
+    __tablename__ = 'orders'
+
+    serialize_rules = ('-user.orders', '-order_items.order', )
+
+    id = db.Column(db.Integer, primary_key=True)
+    order_date = db.Column(db.DateTime)
+    photo_quantity = db.Column(db.Integer)
+    order_price = db.Column(db.Float)
+    order_purchased = db.Column(db.Boolean)
+
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    user = db.relationship('User', back_populates='orders')
+
+    order_items = db.relationship('OrderItem', back_populates='order', cascade='all, delete-orphan')
+
+    photos = association_proxy('order_items', 'photo', creator=lambda photo_obj: OrderItem(photo=photo_obj))
+
+    def __repr__(self):
+        return f'<Order {self.id} {self.order_purchaed}>'
+
 class Photo(db.Model, SerializerMixin):
     __tablename__ = 'photos'
 
@@ -77,6 +79,8 @@ class Photo(db.Model, SerializerMixin):
     photo_shoot = db.relationship('PhotoShoot', back_populates='photos')
 
     order_items = db.relationship('OrderItem', back_populates='photo', cascade='all, delete-orphan')
+
+    orders = association_proxy('order_items', 'order', creator=lambda order_obj: OrderItem(order=order_obj))
 
     def __repr__(self):
         return f'<Photo {self.id} Cloudinary Link: {self.cloudinary_link}>'
