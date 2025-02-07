@@ -74,7 +74,7 @@ class Order(db.Model, SerializerMixin):
     photos = association_proxy('order_items', 'photo', creator=lambda photo_obj: OrderItem(photo=photo_obj))
 
     def __repr__(self):
-        return f'<Order {self.id} {self.order_purchaed}>'
+        return f'<Order {self.id} {self.order_purchased}>'
 
 class Photo(db.Model, SerializerMixin):
     __tablename__ = 'photos'
