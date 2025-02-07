@@ -1,7 +1,8 @@
 from sqlalchemy_serializer import SerializerMixin
 from sqlalchemy.ext.associationproxy import association_proxy
+from sqlalchemy.ext.hybrid import hybrid_property
 
-from config import db
+from config import bcrypt, db
 
 # Models go here!
 
@@ -16,7 +17,21 @@ class User(db.Model, SerializerMixin):
     lastname = db.Column(db.String)
     username = db.Column(db.String, unique=True)
     email = db.Column(db.String, unique=True)
-    password = db.Column(db.String)
+    
+    _password_hash = db.Column(db.String)
+
+    @hybrid_property
+    def password_hash(self):
+        return self._password_hash
+    
+    @password_hash.setter
+    def password_hash(self, password):
+        password_hash = bcrypt.generate_password_hash(password.encode("utf8"))
+        self._pasword_hash = password_hash.decode("utf8")
+    
+    def authenticate(self, password):
+        return bcrypt.check_password_hash(self._password_hash, password.encode("utf8"))
+    
     created_at = db.Column(db.DateTime, server_default=db.func.now())
     updated_at = db.Column(db.DateTime, onupdate=db.func.now())
 
