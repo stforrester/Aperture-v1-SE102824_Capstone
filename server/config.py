@@ -7,6 +7,7 @@ from flask_migrate import Migrate
 from flask_restful import Api
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import MetaData
+from flask_bcrypt import Bcrypt
 
 # Local imports
 
@@ -31,3 +32,8 @@ api = Api(app)
 
 # Instantiate CORS
 CORS(app)
+
+# Instantiate Bcrypt
+bcrypt = Bcrypt(app)
+
+# Per Comparison with Phase-4 Section 6 code, currently do not have: 1.) Api.error_router, 2.) app.secret_key, 
