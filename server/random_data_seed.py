@@ -36,8 +36,9 @@ if __name__ == '__main__':
                 lastname=fake.last_name(),
                 username=fake.unique.user_name(),
                 email=fake.unique.email(),
-                password="test_password",
             )
+
+            user.password_hash = "test_password"
 
             users.append(user)
         
