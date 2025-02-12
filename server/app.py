@@ -25,7 +25,7 @@ class Users(Resource):
         new_user = User(
             firstname=request_json['firstname'],
             lastname=request_json['lastname'],
-            username=request_json['lastname'],
+            username=request_json['username'],
             email=request_json['email'],
             password_hash=request_json['password']
         )
