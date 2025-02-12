@@ -199,6 +199,8 @@ class LoggedIn(Resource):
         user = User.query.filter(User.id == session.get("user_id")).first()
         if user:
             return make_response(user.to_dict(rules=("-_password_hash",)), 200)
+        else:
+            raise NotFound
         
 api.add_resource(LoggedIn, "/logged_in")
 
