@@ -50,7 +50,7 @@ class UserByID(Resource):
         user_dict = user.to_dict()
 
         response = make_response(
-            user_dict(),
+            user_dict,
             200
         )
 
