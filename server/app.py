@@ -83,7 +83,7 @@ class PhotoShootByID(Resource):
 
         return response
 
-api.add_resource(PhotoShootByID, '/photos/<int:id>')
+api.add_resource(PhotoShootByID, '/photo_shoots/<int:id>')
 
 class Cart(Resource):
     def get(self):
@@ -98,7 +98,7 @@ class Cart(Resource):
 
         return response
 
-api.add_resource(Cart)
+api.add_resource(Cart, '/cart')
 
 class OrderItems(Resource):
     def post(self):
@@ -145,14 +145,16 @@ class Checkout(Resource):
         db.session.add(new_order)
         db.session.commit()
 
+        new_order_dict = new_order.to_dict()
+
         response = make_response(
-            new_order,
+            new_order_dict,
             200
         )
 
         return response
 
-api.add_resource(Checkout, '/checkout')                
+api.add_resource(Checkout, '/checkout/<int:id>')                
 
 class PlacedOrders(Resource):
     def get(self):

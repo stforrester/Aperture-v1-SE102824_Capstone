@@ -10,7 +10,11 @@ class User(db.Model, SerializerMixin):
     __tablename__ = 'users'
 
     # Prevents recursion errors when: 1. User's orders are returned and 2. Users's photo_shoots are returned
-    serialize_rules = ('-orders.user', '-photo_shoots.user', )
+    serialize_rules = ('-orders.user',
+                       '-orders.order_items.photo.photo_shoot.user',
+                       '-photo_shoots.user',
+                       '-photo_shoots.photos.order_items.order.user',
+                    )
 
     id = db.Column(db.Integer, primary_key=True)
     firstname = db.Column(db.String)
@@ -48,7 +52,11 @@ class PhotoShoot(db.Model, SerializerMixin):
     __tablename__ = 'photo_shoots'
 
     # Prevents recursion errors when: 1. PhotoShoot's user is returned and 2. PhotoShoot's photos are returned
-    serialize_rules = ('-user.photo_shoots', '-photos.photo_shoot', )
+    serialize_rules = ('-user.photo_shoots',
+                       '-user.orders.order_items.photo.photo_shoot',
+                       '-photos.photo_shoot',
+                       '-photos.order_items.order.user.photo_shoots',
+                    )
 
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String)
@@ -70,7 +78,11 @@ class Order(db.Model, SerializerMixin):
     __tablename__ = 'orders'
 
     # Prevents recursion errors when: 1. Order's user is returned and 2. Order's order_items are returned
-    serialize_rules = ('-user.orders', '-order_items.order', )
+    serialize_rules = ('-user.orders',
+                       '-user.photo_shoots.photos.order_items.order',
+                       '-order_items.order',
+                       '-order_items.photo.photo_shoot.user.orders',
+                    )
 
     id = db.Column(db.Integer, primary_key=True)
     order_date = db.Column(db.DateTime)
@@ -95,7 +107,11 @@ class Photo(db.Model, SerializerMixin):
     __tablename__ = 'photos'
 
     # Prevents recursion errors when: 1. Photo's photo_shoot is returned and 2. Photo's order_items are returned
-    serialize_rules = ('-photo_shoot.photos', '-order_items.photo', )
+    serialize_rules = ('-photo_shoot.photos',
+                       '-photo_shoot.user.orders.order_items.photo',
+                       '-order_items.photo',
+                       '-order_items.order.user.photo_shoots.photos',
+                    )
 
     id = db.Column(db.Integer, primary_key=True)
     cloudinary_link = db.Column(db.String) # need to further research Cloudinary API and implement in model as appropriate
@@ -119,7 +135,11 @@ class OrderItem(db.Model, SerializerMixin):
     __tablename__ = 'order_items'
 
     # Prevents recursion errors when: 1. OrderItem's order is returned and 2. OrderItem's photo is returned
-    serialize_rules = ('-order.order_items', '-photo.order_items', )
+    serialize_rules = ('-order.order_items',
+                       '-order.user.photo_shoots.photos.order_items',
+                       '-photo.order_items',
+                       '-photo.photo_shoot.user.orders.order_items',
+                    )
 
     id = db.Column(db.Integer, primary_key=True)
 
