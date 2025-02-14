@@ -39,10 +39,12 @@ api.add_resource(Users, "/users")
     
 class UserByID(Resource):
     def patch(self, id):
+        request_json = request.get_json()
+
         user = User.query.filter_by(id=id).first()
         
-        for attr in request.form:
-            setattr(user, attr, request.form[attr])
+        for attr in request_json:
+            setattr(user, attr, request_json[attr])
         
         db.session.add(user)
         db.session.commit()
@@ -200,7 +202,7 @@ class LoggedIn(Resource):
         if user:
             return make_response(user.to_dict(rules=("-_password_hash",)), 200)
         else:
-            raise NotFound
+            raise Unauthorized
         
 api.add_resource(LoggedIn, "/logged_in")
 

@@ -14,8 +14,8 @@ function Login({ updateUser }) {
 
     const formik = useFormik({
         initialValues: {
-            username:'Enter your Username here',
-            password:'Enter your Password here' 
+            username:'',
+            password:'' 
         },
         validationSchema: formSchema,
         onSubmit: (inputs) => {
@@ -33,7 +33,7 @@ function Login({ updateUser }) {
                     response.json()
                     .then(user_data => {
                         updateUser(user_data)
-                        navigate('/')
+                        navigate('/landing_page')
                     })
                 }
                 else {
@@ -51,13 +51,13 @@ function Login({ updateUser }) {
     return (
         <>
         <h1>Login:</h1>
-        <Form onSubmit={formik.handleSubmit}>
+        <form onSubmit={formik.handleSubmit}>
         <label>Username: </label>
         <input type='text' name='username' value={formik.values.username} onChange={formik.handleChange} />
         <label>Password: </label>
         <input type='text' name='password' value={formik.values.password} onChange={formik.handleChange} />
         <input type='submit' value={'Sign in'} />
-        </Form>
+        </form>
         {error && <h1 style={{color:'red'}}>{error.error}</h1>}
         <></>
         <h3>Don't have an account? Create one using the link below: </h3>

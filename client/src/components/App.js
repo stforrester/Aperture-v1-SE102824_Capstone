@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 import Login from './Login.js'
+import CreateAccount from './CreateAccount.js'
 
 function App() {
   const [user, setUser] = useState(null)
-  const navigate = useNavigate();
 
   useEffect(() => {
     fetchUser()
@@ -25,15 +25,18 @@ function App() {
     })
   )
 
+  const updateUser = (user) => setUser(user)
+
   if(!user) return (
     <Routes>
-      <Route path="/login" element={<Login user={user}/>} />
-      <Route path="/createAccount" element={<CreateAccount user={user}/>} />
+      <Route path="/" element={<Login updateUser={updateUser}/>} />
     </Routes>
   )
 
   return(
-    <></>
+    <>
+    
+    </>
   )
 }
 
