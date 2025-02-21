@@ -54,8 +54,12 @@ function Login({ updateUser }) {
         <form onSubmit={formik.handleSubmit}>
         <label>Username: </label>
         <input type='text' name='username' value={formik.values.username} onChange={formik.handleChange} />
+        <br />
+        <br />
         <label>Password: </label>
         <input type='text' name='password' value={formik.values.password} onChange={formik.handleChange} />
+        <br />
+        <br />
         <input type='submit' value={'Sign in'} />
         </form>
         {error && <h1 style={{color:'red'}}>{error.error}</h1>}

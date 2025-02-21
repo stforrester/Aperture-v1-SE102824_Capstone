@@ -31,6 +31,7 @@ function App() {
   if(!user) return (
     <Routes>
       <Route path="/" element={<Login updateUser={updateUser}/>} />
+      <Route path="/createAccount" element={<CreateAccount updateUser={updateUser}/>} />
     </Routes>
   )
 
