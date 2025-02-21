@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 
 import Login from './Login.js'
 import CreateAccount from './CreateAccount.js'
+import HomePage from './HomePage.js'
 
 function App() {
   const [user, setUser] = useState(null)
@@ -35,7 +36,9 @@ function App() {
 
   return(
     <>
-    
+    <Routes>
+      <Route path="/home_page" element={<HomePage />} />
+    </Routes>
     </>
   )
 }
