@@ -63,7 +63,6 @@ function Login({ updateUser }) {
         <input type='submit' value={'Sign in'} />
         </form>
         {error && <h1 style={{color:'red'}}>{error.error}</h1>}
-        <></>
         <h3>Don't have an account? Create one using the link below: </h3>
         <button type="button" onClick={handleCreateAccountRedirect}>Create Account</button>
         </>
