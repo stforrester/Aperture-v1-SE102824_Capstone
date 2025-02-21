@@ -38,7 +38,7 @@ function App() {
   return(
     <>
     <Routes>
-      <Route path="/home_page" element={<HomePage />} />
+      <Route path="/home_page" element={<HomePage updateUser={updateUser} user={user}/>} />
     </Routes>
     </>
   )
