@@ -8,10 +8,10 @@ function EditAccount({ updateUser, user }) {
 
     const formSchema = yup.object().shape({
         username: yup.string().required(),
-        firstname: yup.string().required(),
-        lastname: yup.string().required(),
-        email: yup.string().required(),
-        password: yup.string().required()
+        firstname: yup.string(),
+        lastname: yup.string(),
+        email: yup.string(),
+        password: yup.string()
     })
 
     const formik = useFormik({
@@ -24,13 +24,21 @@ function EditAccount({ updateUser, user }) {
         },
         validationSchema: formSchema,
         onSubmit: (inputs) => {
+
+            const requestBody = { ...inputs }
+
+            for (let formAttribute in inputs) {
+                if (!inputs[formAttribute]) {
+                delete requestBody[formAttribute]
+            }}
+           
             fetch(`/users/${user.id}`,
                 {
                     method:'PATCH',
                     headers: {
                         "Content-Type":"application/json",
                     },
-                    body: JSON.stringify(inputs),
+                    body: JSON.stringify(requestBody),
                 }
             )
             .then(response => {
