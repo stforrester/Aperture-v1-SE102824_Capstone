@@ -23,7 +23,7 @@ function CreateAccount({ updateUser }) {
             email:'',
             password:''
         },
-        validationschema: formSchema,
+        validationSchema: formSchema,
         onSubmit: (inputs) => {
             fetch('/users',
                 {
