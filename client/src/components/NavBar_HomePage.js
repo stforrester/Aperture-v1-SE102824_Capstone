@@ -30,7 +30,7 @@ function NavBar_HomePage({ updateUser }) {
     return (
         <>
         <span>
-            Menu:       
+            Menu:
             <button type="button">View Order History</button>
             <button type="button">Edit Account Info</button>
             <button type="button" onClick={logout}>Logout</button>
