@@ -4,6 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import Login from './Login.js'
 import CreateAccount from './CreateAccount.js'
 import HomePage from './HomePage.js'
+import EditAccount from "./EditAccount.js";
 
 function App() {
   const [user, setUser] = useState(null)
@@ -30,15 +31,16 @@ function App() {
 
   if(!user) return (
     <Routes>
-      <Route path="/" element={<Login updateUser={updateUser}/>} />
-      <Route path="/createAccount" element={<CreateAccount updateUser={updateUser}/>} />
+      <Route path="/" element={<Login updateUser={updateUser} />} />
+      <Route path="/createAccount" element={<CreateAccount updateUser={updateUser} />} />
     </Routes>
   )
 
   return(
     <>
     <Routes>
-      <Route path="/home_page" element={<HomePage updateUser={updateUser} user={user}/>} />
+      <Route path="/home_page" element={<HomePage updateUser={updateUser} user={user} />} />
+      <Route path="/edit_account" element={<EditAccount updateUser={updateUser} user={user} />} />
     </Routes>
     </>
   )
