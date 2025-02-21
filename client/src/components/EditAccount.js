@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
 
+import NavBar_EditAccount from './NavBar_EditAccount'
+
 function EditAccount({ updateUser, user }) {
     const [error, setError] = useState(null)
 
@@ -58,6 +60,7 @@ function EditAccount({ updateUser, user }) {
 
     return(
         <>
+        <NavBar_EditAccount updateUser={updateUser}/>
         <h1>Edit Account Form:</h1>
         <form onSubmit={formik.handleSubmit}>
             <label>Username: </label>
