@@ -193,6 +193,8 @@ class Login(Resource):
         if user and user.authenticate(request.get_json().get('password')):
             session["user_id"] = user.id
             return make_response(user.to_dict(rules=("-_password_hash",)), 200)
+        else:
+            raise NotFound
 
 api.add_resource(Login, "/login")
 
