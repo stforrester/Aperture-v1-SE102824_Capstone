@@ -28,7 +28,7 @@ function NavBar_EditAccount({ updateUser }) {
     }
 
     const handleHomePageRedirect = () => {
-        navigate("/home_page"); 
+        navigate("/"); 
       };
     
     return (

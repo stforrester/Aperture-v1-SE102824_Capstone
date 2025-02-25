@@ -33,7 +33,7 @@ function Login({ updateUser }) {
                     response.json()
                     .then(user_data => {
                         updateUser(user_data)
-                        navigate('/home_page')
+                        navigate('/')
                     })
                 }
                 else {

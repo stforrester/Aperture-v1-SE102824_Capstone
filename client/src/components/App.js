@@ -39,7 +39,7 @@ function App() {
   return(
     <>
     <Routes>
-      <Route path="/home_page" element={<HomePage updateUser={updateUser} user={user} />} />
+      <Route path="/" element={<HomePage updateUser={updateUser} user={user} />} />
       <Route path="/edit_account" element={<EditAccount updateUser={updateUser} user={user} />} />
     </Routes>
     </>
