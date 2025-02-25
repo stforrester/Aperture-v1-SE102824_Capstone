@@ -7,6 +7,7 @@ import NavBar_EditAccount from './NavBar_EditAccount'
 
 function EditAccount({ updateUser, user }) {
     const [error, setError] = useState(null)
+    const navigate = useNavigate()
 
     const formSchema = yup.object().shape({
         username: yup.string().required(),
@@ -48,6 +49,7 @@ function EditAccount({ updateUser, user }) {
                     response.json()
                     .then(user_data => {
                         updateUser(user_data)
+                        navigate('/')
                     })
                 }
                 else {
