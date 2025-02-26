@@ -26,7 +26,14 @@ function PhotoShootContainer() {
         })
     }, [setPhotoShootsData])
 
-    // const handleSortClick = ()
+    if(!photoShoots) return <div>Loading Photo Shoots...</div>
+
+    return (
+        <div>
+            <PhotoShootFilters />
+            <PhotoShootList photoShoots={photoShoots} />
+        </div>
+    )
 
 }
 
