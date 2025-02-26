@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import NavBar_HomePage from './NavBar_HomePage.js'
+import PhotoShootContainer from './PhotoShootContainer.js'
 
 function HomePage({ updateUser, user }) {
     
@@ -9,6 +10,7 @@ function HomePage({ updateUser, user }) {
         <>
         <h1>Welcome, {user.firstname} {user.lastname}!</h1>
         <NavBar_HomePage updateUser={updateUser}/>
+        <PhotoShootContainer />
         </>
     )
 }

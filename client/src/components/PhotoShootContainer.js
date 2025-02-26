@@ -30,8 +30,7 @@ function PhotoShootContainer() {
 
     return (
         <div>
-            <PhotoShootFilters />
-            <PhotoShootList photoShoots={photoShoots} />
+            
         </div>
     )
 
