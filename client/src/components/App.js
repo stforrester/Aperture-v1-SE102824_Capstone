@@ -6,6 +6,8 @@ import CreateAccount from './CreateAccount.js'
 import HomePage from './HomePage.js'
 import EditAccount from "./EditAccount.js";
 
+import 'bootstrap/dist/css/bootstrap.min.css'
+
 function App() {
   const [user, setUser] = useState(null)
 
