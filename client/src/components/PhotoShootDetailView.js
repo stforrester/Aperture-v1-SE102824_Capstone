@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 
 import NavBar_PhotoShoot from './NavBar_PhotoShoot.js'
-import PhotosContainer from './PhotosContainer.js'
 
-function PhotoShootDetailView() {
+
+function PhotoShootDetailView({ updateUser }) {
 
     const navigate = useNavigate()
     const { id } = useParams()
@@ -34,7 +34,7 @@ function PhotoShootDetailView() {
         <>
         <NavBar_PhotoShoot updateUser={updateUser}/>
         <h2></h2>
-        <PhotosContainer />
+        
         </>
     )
 }

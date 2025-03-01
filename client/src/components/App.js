@@ -5,6 +5,7 @@ import Login from './Login.js'
 import CreateAccount from './CreateAccount.js'
 import HomePage from './HomePage.js'
 import EditAccount from "./EditAccount.js";
+import PhotoShootDetailView from "./PhotoShootDetailView.js";
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 
@@ -42,7 +43,7 @@ function App() {
     <>
     <Routes>
       <Route path="/" element={<HomePage updateUser={updateUser} user={user} />} />
-      <Route path="/photoshoots/:id" />
+      <Route path="/photoshoots/:id" element={<PhotoShootDetailView updateUser={updateUser}/>} />
       <Route path="/edit_account" element={<EditAccount updateUser={updateUser} user={user} />} />
     </Routes>
     </>
