@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 
+import PhotoList from './PhotoList'
+
 function PhotosContainer() {
 
     const { id } = useParams()
@@ -29,7 +31,7 @@ function PhotosContainer() {
     return (
         <div>
             <h3>{photoShoot.title} {photoShoot.date}</h3>
-            
+            <PhotoList photos={photoShoot.photos}/>
         </div>
     )
 
