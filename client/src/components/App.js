@@ -43,7 +43,7 @@ function App() {
     <>
     <Routes>
       <Route path="/" element={<HomePage updateUser={updateUser} user={user} />} />
-      <Route path="/photoshoots/:id" element={<PhotoShootDetailView updateUser={updateUser}/>} />
+      <Route path="/photo_shoots/:id" element={<PhotoShootDetailView updateUser={updateUser}/>} />
       <Route path="/edit_account" element={<EditAccount updateUser={updateUser} user={user} />} />
     </Routes>
     </>

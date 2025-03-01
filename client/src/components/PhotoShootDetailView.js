@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 
 import NavBar_PhotoShoot from './NavBar_PhotoShoot.js'
-
+import PhotosContainer from './PhotosContainer.js'
 
 function PhotoShootDetailView({ updateUser }) {
 
@@ -14,7 +14,7 @@ function PhotoShootDetailView({ updateUser }) {
     const [error, setError] = useState()
 
     useEffect(() => {
-        fetch(`photo_shoots/${id}`)
+        fetch(`${id}`)
         .then(response => {
             if(response.ok){
                 response.json()
@@ -33,8 +33,7 @@ function PhotoShootDetailView({ updateUser }) {
     return (
         <>
         <NavBar_PhotoShoot updateUser={updateUser}/>
-        <h2></h2>
-        
+        <PhotosContainer photos={photoShoot} />
         </>
     )
 }

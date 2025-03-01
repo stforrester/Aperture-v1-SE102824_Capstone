@@ -8,7 +8,7 @@ function PhotoShootCard({photoShoot}) {
     const navigate = useNavigate()
 
     const handleViewPhotosRedirect = () => {
-        navigate(`/photoshoots/${photoShoot.id}`)
+        navigate(`/photo_shoots/${photoShoot.id}`)
     }
 
 
