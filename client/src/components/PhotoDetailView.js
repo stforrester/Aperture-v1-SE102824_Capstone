@@ -1,15 +1,15 @@
 import Container from 'react-bootstrap/Container'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
-import Image from 'react-bootstrap/Image'
 import Button from 'react-bootstrap/Button'
+import { Image } from 'cloudinary-react'
 
 function PhotoDetailView({ photo, handleSetPhoto }) {
     
     return (
         <Container>
             <Row>
-                <Image src={photo.cloudinary_link} alt={`Photo ${photo.id} Image`} />
+                <Image cloudName="stuart-forrester" publicId={photo.cloudinary_link} alt={`Photo ${photo.id} Image`} />
             </Row>
             <Row>
                 <Col xs={4}>
