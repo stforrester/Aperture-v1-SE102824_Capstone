@@ -1,15 +1,35 @@
-import { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useParams, useNavigate } from 'react-router-dom'
 
-import PhotoShootList from './PhotoShootList.js'
+function PhotosContainer() {
 
-function PhotosContainer({ photos }) {
+    const { id } = useParams()
 
-    if(!photos) return <div>Loading Photos...</div>
+    const [photoShoot, setPhotoShoot] = useState()
+    const [error, setError] = useState()
+
+    useEffect(() => {
+        fetch(`/photo_shoots/${id}`)
+        .then(response => {
+            if(response.ok){
+                response.json()
+                .then(data =>{
+                    setPhotoShoot(data)
+                })
+            }
+            else {
+                response.json()
+                .then(error => setError(error))
+            }
+        })
+    }, [])
+
+    if(!photoShoot) return <div>Loading Photos...</div>
 
     return (
         <div>
-            <h2>{photos.title} {photos.date}</h2>
-            <PhotoShootList photos={photos}/>
+            <h3>{photoShoot.title} {photoShoot.date}</h3>
+            
         </div>
     )
 
