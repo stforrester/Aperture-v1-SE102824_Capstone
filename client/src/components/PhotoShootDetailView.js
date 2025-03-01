@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
+import React, { useState } from 'react'
 
 import NavBar_PhotoShoot from './NavBar_PhotoShoot.js'
 import PhotosContainer from './PhotosContainer.js'
