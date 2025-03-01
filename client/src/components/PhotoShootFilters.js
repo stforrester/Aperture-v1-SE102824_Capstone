@@ -8,7 +8,7 @@ function PhotoShootFilters({handleSortAscendingSelected, handleSortDescendingSel
         <Container fluid>
             <Row className="pb-3 d-flex justify-content-between align-items-center">
                 <Col xs={4}>
-                    <span>My Photo Shoots:</span>
+                    <span><h3>My Photo Shoots:</h3></span>
                 </Col>
 
                 <Col xs={5}></Col>
