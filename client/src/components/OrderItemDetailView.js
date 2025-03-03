@@ -6,19 +6,17 @@ import { Image } from 'cloudinary-react'
 
 function OrderItemDetailView({ orderItem, handleSetOrderItem }) {
 
-    const photo = orderItem.photo
-    
     return (
         <Container>
             <Row>
-                <Image cloudName="stuart-forrester" publicId={photo.cloudinary_link} alt={`Photo ${photo.id} Image`} />
+                <Image cloudName="stuart-forrester" publicId={orderItem.photo.cloudinary_link} alt={`Photo ${orderItem.photo.id} Image`} />
             </Row>
             <Row>
                 <Col xs={4}>
                     <Button>Remove</Button>
                 </Col>
                 <Col xs={4}>
-                    ${photo.photo_price}
+                    ${orderItem.photo.photo_price}
                 </Col>
                 <Col xs={4}>
                     <Button onClick={()=>handleSetOrderItem(null)}>Return to Cart</Button>

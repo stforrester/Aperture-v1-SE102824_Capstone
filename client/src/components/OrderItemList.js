@@ -2,7 +2,7 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
-import PhotoCard from './PhotoCard.js'
+import OrderItemCard from './OrderItemCard.js'
 
 function OrderItemList({ orderItems, handleSetOrderItem }) {
     return (
@@ -10,7 +10,7 @@ function OrderItemList({ orderItems, handleSetOrderItem }) {
             <Row>
                 {orderItems && orderItems.map((orderItem) => 
                     <Col key={orderItem.id} xs={4}>
-                        <PhotoCard photo={orderItem.photo} handleSetPhoto={handleSetOrderItem} />
+                        <OrderItemCard orderItem={orderItem} handleSetOrderItem={handleSetOrderItem} />
                     </Col>
                 )}
             </Row>

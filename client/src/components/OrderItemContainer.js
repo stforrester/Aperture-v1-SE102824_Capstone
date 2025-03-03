@@ -40,7 +40,7 @@ function OrderItemContainer() {
     return (
         <div>
             <h3>{orderItem.photo.photo_shoot.title} {orderItem.photo.photo_shoot.title} - Photo ID: {orderItem.photo.id}</h3>
-            <OrderItemDetailView photo={orderItem.photo} handleSetOrderItem={handleSetOrderItem}/>        
+            <OrderItemDetailView orderItem={orderItem} handleSetOrderItem={handleSetOrderItem}/>        
         </div>
     )
 
