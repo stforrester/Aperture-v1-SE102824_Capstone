@@ -15,7 +15,7 @@ function OrderItemDetailView({ orderItem, handleSetOrderItem }) {
             </Row>
             <Row>
                 <Col xs={4}>
-                    <Button>Remove</Button>
+                    <Button>Remove from Cart</Button>
                 </Col>
                 <Col xs={4}>
                     ${photo.photo_price}
