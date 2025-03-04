@@ -108,7 +108,6 @@ class Orders(Resource):
         request_json = request.get_json()
 
         new_order = Order(
-            order_date=datetime.now(),
             photo_quantity=0,
             order_price=0,
             order_purchased=False,
@@ -157,11 +156,17 @@ class Checkout(Resource):
 
         order.photo_quantity = len(order.photos)
         order.order_purchased = True
+        order.order_date=datetime.now()
 
         db.session.add(order)
         db.session.commit()
 
-        new_order = Order(photo_quantity = 0, order_price = 0, order_purchased = False, user_id = session.get("user_id"))
+        new_order = Order(
+            photo_quantity = 0,
+            order_price = 0,
+            order_purchased = False,
+            user_id = session.get("user_id")
+        )
 
         db.session.add(new_order)
         db.session.commit()
