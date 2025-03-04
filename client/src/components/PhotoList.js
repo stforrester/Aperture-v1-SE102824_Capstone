@@ -5,13 +5,13 @@ import Col from 'react-bootstrap/Col'
 
 import PhotoCard from './PhotoCard.js'
 
-function PhotoList({ photos, handleSetPhoto }) {
+function PhotoList({ photos, handleSetPhoto, cart }) {
     return (
         <Container>
             <Row>
                 {photos && photos.map((photo) => 
                     <Col key={photo.id} xs={4}>
-                        <PhotoCard photo={photo} handleSetPhoto={handleSetPhoto} />
+                        <PhotoCard photo={photo} handleSetPhoto={handleSetPhoto} cart={cart}/>
                     </Col>
                 )}
             </Row>
