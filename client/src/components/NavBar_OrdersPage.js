@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-
-function NavBar_HomePage({ updateUser }) {
+function NavBar_OrdersPage({ updateUser }) {
     const [error, setError] = useState(null)
     const navigate = useNavigate()
 
@@ -27,19 +26,19 @@ function NavBar_HomePage({ updateUser }) {
         })
     }
 
-    const handleOrderHistoryRedirect = () => {
-        navigate("/orders")
+    const handleHomePageRedirect = () => {
+        navigate("/")
     }
 
     const handleEditAccountRedirect = () => {
-        navigate("/edit_account") 
+        navigate("/edit_account"); 
     }
-    
+
     return (
         <>
         <span>
             Menu:
-            <button type="button" onClick={handleOrderHistoryRedirect}>View Order History</button>
+            <button type="button" onClick={handleHomePageRedirect}>My Photo Shoots</button>
             <button type="button" onClick={handleEditAccountRedirect}>Edit Account Info</button>
             <button type="button" onClick={logout}>Logout</button>
         </span>
@@ -47,4 +46,4 @@ function NavBar_HomePage({ updateUser }) {
     )
 }
 
-export default NavBar_HomePage
+export default NavBar_OrdersPage

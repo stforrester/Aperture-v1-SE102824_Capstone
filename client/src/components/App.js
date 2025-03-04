@@ -9,6 +9,7 @@ import PhotoShootDetailView from "./PhotoShootDetailView.js"
 import CartPage from "./CartPage.js"
 
 import 'bootstrap/dist/css/bootstrap.min.css'
+import OrdersPage from "./OrdersPage.js"
 
 function App() {
   const [user, setUser] = useState(null)
@@ -47,7 +48,7 @@ function App() {
       <Route path="/photoshoots/:id" element={<PhotoShootDetailView updateUser={updateUser} />} />
       <Route path="/edit_account" element={<EditAccount updateUser={updateUser} user={user} />} />
       <Route path="/cart" element={<CartPage updateUser={updateUser} />} />
-      <Route path="/orders" element={<HomePage updateUser={updateUser} user={user} />} />
+      <Route path="/orders" element={<OrdersPage updateUser={updateUser} user={user} />} />
     </Routes>
     </>
   )
