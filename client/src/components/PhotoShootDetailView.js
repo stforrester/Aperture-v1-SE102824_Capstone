@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 import NavBar_PhotoShoot from './NavBar_PhotoShoot.js'
 import PhotosContainer from './PhotosContainer.js'

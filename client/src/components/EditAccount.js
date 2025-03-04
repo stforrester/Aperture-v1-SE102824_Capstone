@@ -2,8 +2,12 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 
 import NavBar_EditAccount from './NavBar_EditAccount'
+import CartButton from './CartButton'
 
 function EditAccount({ updateUser, user }) {
     const [error, setError] = useState(null)
@@ -62,8 +66,20 @@ function EditAccount({ updateUser, user }) {
 
     return(
         <>
+         <Container fluid>
+            <Row className="pb-3 d-flex justify-content-between align-items-center">
+                <Col xs={2}>
+                    <span><h3>Edit Account Info</h3></span>
+                </Col>
+
+                <Col xs={1}>
+                    <CartButton />
+                </Col>
+
+            </Row>
+        </Container>
         <NavBar_EditAccount updateUser={updateUser}/>
-        <h1>Edit Account Form:</h1>
+        <h4>Edit Account Form:</h4>
         <form onSubmit={formik.handleSubmit}>
             <label>Username: </label>
             <input type ='text' name='username' value={formik.values.username} onChange={formik.handleChange} />
