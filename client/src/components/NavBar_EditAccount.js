@@ -29,14 +29,18 @@ function NavBar_EditAccount({ updateUser }) {
 
     const handleHomePageRedirect = () => {
         navigate("/"); 
-      };
+    }
+
+    const handleOrderHistoryRedirect = () => {
+        navigate("/orders")
+    }
     
     return (
         <>
         <span>
             Menu:
             <button type="button" onClick={handleHomePageRedirect}>My Photo Shoots</button>
-            <button type="button">View Order History</button>
+            <button type="button" onClick={handleOrderHistoryRedirect}>View Order History</button>
             <button type="button" onClick={logout}>Logout</button>
         </span>
         </>
