@@ -1,11 +1,33 @@
+import React, { useState } from "react"
 import Card from 'react-bootstrap/Card'
-import ListGroup from 'react-bootstrap/ListGroup'
-import Badge from 'react-bootstrap/Badge'
 import Button from 'react-bootstrap/Button'
 
-function OrderItemCard({ orderItem, handleSetOrderItem }) {
-    
+function OrderItemCard({ orderItem, handleSetOrderItem, orderItems, handleSetOrderItems }) {
+    const [error, setError] = useState()
+
     const photo = orderItem.photo
+
+    const handleRemove = (id) => {
+        fetch(`/order_items/${id}`,
+            {
+                method:'DELETE',
+                headers: {
+                    "Content-Type":"application/json",
+                },
+            }
+        )
+        .then(response => {
+            if(response.ok){
+                handleSetOrderItems(
+                    orderItems.filter(item => item !== orderItem)
+                )
+            }
+            else {
+                response.json()
+                .then(error => setError(error))
+            }
+        })
+    }
 
     return (
         <Card style={{width: '20rem'}}>
@@ -14,7 +36,7 @@ function OrderItemCard({ orderItem, handleSetOrderItem }) {
                 <Card.Img variant="top" src={photo.cloudinary_link} alt={`Photo ${photo.id} Image`} />
                 <Card.Text className="d-flex justify-content-center mt-3">${photo.photo_price}</Card.Text>
                 <Button onClick={()=>handleSetOrderItem(orderItem)}>View Photo</Button>
-                <Button>Remove</Button>
+                <Button onClick={()=>handleRemove(orderItem.id)}>Remove</Button>
             </Card.Body>
         </Card>
     )
