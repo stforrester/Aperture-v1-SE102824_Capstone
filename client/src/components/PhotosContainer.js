@@ -10,6 +10,7 @@ function PhotosContainer() {
 
     const [photoShoot, setPhotoShoot] = useState()
     const [photo, setPhoto] = useState(null)
+    const [cart, setCart] = useState()
     const [error, setError] = useState()
 
     useEffect(() => {
@@ -28,6 +29,22 @@ function PhotosContainer() {
         })
     }, [])
 
+    useEffect(() => {
+        fetch('/cart')
+        .then(response => {
+            if(response.ok){
+                response.json()
+                .then(data=>{
+                    setCart(data)
+                })
+            }
+            else {
+                response.json
+                .then(error => setError(error))
+            }
+        })
+    }, [])
+
     const handleSetPhoto = (photo) => {
         setPhoto(photo)
     }
@@ -37,14 +54,14 @@ function PhotosContainer() {
     if(!photo) return (
         <div>
             <h3>{photoShoot.title} {photoShoot.date}</h3>
-            <PhotoList photos={photoShoot.photos} handleSetPhoto={handleSetPhoto} />
+            <PhotoList photos={photoShoot.photos} handleSetPhoto={handleSetPhoto} cart={cart}/>
         </div>
     )
 
     return (
         <div>
             <h3>{photoShoot.title} {photoShoot.date} - Photo ID: {photo.id}</h3>
-            <PhotoDetailView photo={photo} handleSetPhoto={handleSetPhoto}/>            
+            <PhotoDetailView photo={photo} handleSetPhoto={handleSetPhoto} cart={cart}/>            
         </div>
     )
 
