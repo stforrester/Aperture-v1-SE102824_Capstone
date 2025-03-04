@@ -72,7 +72,6 @@ function OrderItemContainer() {
         orderItems.forEach(obj =>{
             totalPrice += obj.photo.photo_price
         })
-        console.log(totalPrice.toFixed(2))
         return totalPrice.toFixed(2)
     }
 
