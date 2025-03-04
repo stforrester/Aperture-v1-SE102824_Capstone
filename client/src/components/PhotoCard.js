@@ -58,7 +58,7 @@ function PhotoCard({ photo, handleSetPhoto, cart }) {
         })
     }
 
-    if(!inCart){
+    //if(!inCart){
         return (
             <Card style={{width: '20rem'}}>
                 <Card.Body>
@@ -70,8 +70,8 @@ function PhotoCard({ photo, handleSetPhoto, cart }) {
                 </Card.Body>
             </Card>
         )
-    }
-    else{
+    //}
+    /*else{
         return (
             <Card style={{width: '20rem'}}>
                 <Card.Body>
@@ -83,7 +83,7 @@ function PhotoCard({ photo, handleSetPhoto, cart }) {
                 </Card.Body>
             </Card>
         )
-    }
+    }*/
 
 }
 
