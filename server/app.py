@@ -112,7 +112,7 @@ class Orders(Resource):
             photo_quantity=0,
             order_price=0,
             order_purchased=False,
-            user_id = request['user_id']
+            user_id = request_json['user_id']
         )
 
         db.session.add(new_order)
