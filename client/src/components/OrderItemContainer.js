@@ -46,7 +46,7 @@ function OrderItemContainer() {
     return (
         <div>
             <h3>{orderItem.photo.photo_shoot.title} {orderItem.photo.photo_shoot.title} - Photo ID: {orderItem.photo.id}</h3>
-            <OrderItemDetailView orderItem={orderItem} handleSetOrderItem={handleSetOrderItem} handleSetOrderItems={handleSetOrderItems}/>        
+            <OrderItemDetailView orderItem={orderItem} handleSetOrderItem={handleSetOrderItem} orderItems={orderItems} handleSetOrderItems={handleSetOrderItems}/>        
         </div>
     )
 
