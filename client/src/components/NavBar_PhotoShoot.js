@@ -30,6 +30,10 @@ function NavBar_PhotoShoot({ updateUser }) {
         navigate("/")
     }
 
+    const handleOrderHistoryRedirect = () => {
+        navigate("/orders")
+    }
+
     const handleEditAccountRedirect = () => {
         navigate("/edit_account")
     }
@@ -39,7 +43,7 @@ function NavBar_PhotoShoot({ updateUser }) {
         <span>
             Menu:
             <button type="button" onClick={handleHomePageRedirect}>My Photo Shoots</button>
-            <button type="button">View Order History</button>
+            <button type="button" onClick={handleOrderHistoryRedirect}>View Order History</button>
             <button type="button" onClick={handleEditAccountRedirect}>Edit Account Info</button>
             <button type="button" onClick={logout}>Logout</button>
         </span>
