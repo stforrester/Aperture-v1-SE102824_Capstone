@@ -1,12 +1,9 @@
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 import Card from 'react-bootstrap/Card'
-import ListGroup from 'react-bootstrap/ListGroup'
-import Badge from 'react-bootstrap/Badge'
 import Button from 'react-bootstrap/Button'
 
-function PhotoCard({ photo, handleSetPhoto, cart }) {
+function PhotoCard({ photo, handleSetPhoto, cart, orderItems=[], handleSetOrderItems}) {
 
-    const [inCart, setInCart] = useState(null)
     const [error, setError] = useState()
 
     const handleAddtoCart = (cart, photo) => {
@@ -28,7 +25,9 @@ function PhotoCard({ photo, handleSetPhoto, cart }) {
             if(response.ok){
                 response.json()
                 .then(orderItem_data => {
-                    setInCart(orderItem_data)
+                    handleSetOrderItems([...orderItems, 
+                        {id:orderItem_data.id, order_id:orderItem_data.order_id, photo:orderItem_data.photo, photo_id:orderItem_data.photo_id}
+                    ])
                 })
             }
             else {
@@ -49,7 +48,7 @@ function PhotoCard({ photo, handleSetPhoto, cart }) {
         )
         .then(response => {
             if(response.ok){
-                setInCart(null)
+                handleSetOrderItems(orderItems.filter(obj => obj.id !== orderItem.id))
             }
             else {
                 response.json()
@@ -58,7 +57,7 @@ function PhotoCard({ photo, handleSetPhoto, cart }) {
         })
     }
 
-    //if(!inCart){
+    if(!(orderItems.some(obj => obj.photo_id === photo.id))){
         return (
             <Card style={{width: '20rem'}}>
                 <Card.Body>
@@ -70,8 +69,8 @@ function PhotoCard({ photo, handleSetPhoto, cart }) {
                 </Card.Body>
             </Card>
         )
-    //}
-    /*else{
+    }
+    else{
         return (
             <Card style={{width: '20rem'}}>
                 <Card.Body>
@@ -79,11 +78,11 @@ function PhotoCard({ photo, handleSetPhoto, cart }) {
                     <Card.Img variant="top" src={photo.cloudinary_link} alt={`Photo ${photo.id} Image`} />
                     <Card.Text className="d-flex justify-content-center mt-3">${photo.photo_price}</Card.Text>
                     <Button onClick={()=>handleSetPhoto(photo)}>View Photo</Button>
-                    <Button onClick={()=>handleRemoveFromCart(inCart)}>Remove from Cart</Button>
+                    <Button onClick={()=>handleRemoveFromCart(orderItems.find(obj => obj.photo_id === photo.id))}>Remove from Cart</Button>
                 </Card.Body>
             </Card>
         )
-    }*/
+    }
 
 }
 

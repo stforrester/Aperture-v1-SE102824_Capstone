@@ -11,6 +11,7 @@ function PhotosContainer() {
     const [photoShoot, setPhotoShoot] = useState()
     const [photo, setPhoto] = useState(null)
     const [cart, setCart] = useState()
+    const [orderItems, setOrderItems] = useState()
     const [error, setError] = useState()
 
     useEffect(() => {
@@ -36,6 +37,7 @@ function PhotosContainer() {
                 response.json()
                 .then(data=>{
                     setCart(data)
+                    setOrderItems(data.order_items)
                 })
             }
             else {
@@ -49,19 +51,23 @@ function PhotosContainer() {
         setPhoto(photo)
     }
 
+    const handleSetOrderItems = (orderItems) => {
+        setOrderItems(orderItems)
+    }
+
     if(!photoShoot) return <div>Loading Photos...</div>
 
     if(!photo) return (
         <div>
             <h3>{photoShoot.title} {photoShoot.date}</h3>
-            <PhotoList photos={photoShoot.photos} handleSetPhoto={handleSetPhoto} cart={cart}/>
+            <PhotoList photos={photoShoot.photos} handleSetPhoto={handleSetPhoto} cart={cart} orderItems={orderItems} handleSetOrderItems={handleSetOrderItems} />
         </div>
     )
 
     return (
         <div>
             <h3>{photoShoot.title} {photoShoot.date} - Photo ID: {photo.id}</h3>
-            <PhotoDetailView photo={photo} handleSetPhoto={handleSetPhoto} cart={cart}/>            
+            <PhotoDetailView photo={photo} handleSetPhoto={handleSetPhoto} cart={cart} orderItems={orderItems} handleSetOrderItems={handleSetOrderItems} />            
         </div>
     )
 
