@@ -67,12 +67,26 @@ function OrderItemContainer() {
         })
     }
 
+    const totalOrderCost = () => {
+        let totalPrice = 0
+        orderItems.forEach(obj =>{
+            totalPrice += obj.photo.photo_price
+        })
+        console.log(totalPrice.toFixed(2))
+        return totalPrice.toFixed(2)
+    }
+
     if(!order) return <div>Loading Photos in Cart...</div>
 
     if(!orderItem) return (
         <div>
             <OrderItemList orderItems={orderItems} handleSetOrderItem={handleSetOrderItem} handleSetOrderItems={handleSetOrderItems}/>
             <Container fluid>
+            <Row className="pb-3 d-flex justify-content-center">
+                <Col className="text-center">
+                    <p>Total: ${totalOrderCost()}</p>
+                </Col>
+            </Row>
             <Row className="pb-3 d-flex justify-content-center">
                 <Col className="text-center">
                     <Button onClick={()=>handlePlaceOrder()}>Place Order</Button>
