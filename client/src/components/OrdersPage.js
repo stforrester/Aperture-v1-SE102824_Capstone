@@ -4,6 +4,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
 import NavBar_OrdersPage from './NavBar_OrdersPage.js'
+import OrdersContainer from './OrdersContainer.js'
 import CartButton from './CartButton.js'
 
 function OrdersPage({ updateUser, user }) {
@@ -19,9 +20,15 @@ function OrdersPage({ updateUser, user }) {
                     </Col>
 
                 </Row>
+                <NavBar_OrdersPage updateUser={updateUser}/>
+                <Row className="pb-3 d-flex justify-content-center">
+                    <Col className="text-left">
+                        <h3>My Order History:</h3>
+                    </Col>
+                </Row>
             </Container>
-
-            <NavBar_OrdersPage updateUser={updateUser}/>
+            
+            <OrdersContainer />
         </>
     )
 }
