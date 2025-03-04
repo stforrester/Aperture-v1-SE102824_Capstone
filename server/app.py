@@ -6,6 +6,7 @@
 from flask import request, make_response, session
 from flask_restful import Resource
 from werkzeug.exceptions import NotFound, Unauthorized
+from datetime import datetime
 
 # Local imports
 from config import app, db, api
@@ -101,6 +102,24 @@ class Cart(Resource):
         return response
 
 api.add_resource(Cart, '/cart')
+
+class Orders(Resource):
+    def post(self):
+        request_json = request.get_json()
+
+        new_order = Order(
+            order_date=datetime.now(),
+            photo_quantity=0,
+            order_price=0,
+            order_purchased=False,
+            user_id = request['user_id']
+        )
+
+        db.session.add(new_order)
+        db.session.commit()
+        return make_response(new_order.to_dict(), 201)
+
+api.add_resource(Orders, '/orders')
 
 class OrderItems(Resource):
     def post(self):
