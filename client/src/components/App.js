@@ -49,6 +49,7 @@ function App() {
       <Route path="/edit_account" element={<EditAccount updateUser={updateUser} user={user} />} />
       <Route path="/cart" element={<CartPage updateUser={updateUser} />} />
       <Route path="/orders" element={<OrdersPage updateUser={updateUser} user={user} />} />
+      <Route path="/orders/:id" />
     </Routes>
     </>
   )
