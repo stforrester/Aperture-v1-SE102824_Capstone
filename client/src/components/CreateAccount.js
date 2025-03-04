@@ -39,7 +39,26 @@ function CreateAccount({ updateUser }) {
                     response.json()
                     .then(user_data => {
                         updateUser(user_data)
-                        navigate('/')
+                        fetch('/orders',
+                            {
+                                method:'POST',
+                                headers: {
+                                    "Content-Type":"application/json",
+                                },
+                                body: JSON.stringify(
+                                    {user_id:user_data.id}
+                                )
+                            }
+                        )
+                        .then(response => {
+                            if(response.ok){
+                                navigate('/')
+                            }
+                            else {
+                                response.json()
+                                .then(error => setError(error))
+                            }
+                        })
                     })
                 }
                 else {
