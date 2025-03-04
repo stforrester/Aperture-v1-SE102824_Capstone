@@ -1,9 +1,15 @@
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+import Button from 'react-bootstrap/Button'
 
 import OrderItemList from './OrderItemList'
 import OrderItemDetailView from './OrderItemDetailView'
 
 function OrderItemContainer() {
+    const navigate = useNavigate()
 
     const [order, setOrder] = useState()
     const [orderItem, setOrderItem] = useState(null)
@@ -35,11 +41,44 @@ function OrderItemContainer() {
         setOrderItems(orderItems)
     }
 
+    const handlePlaceOrder = () => {
+        fetch(`/checkout/${order.id}`,
+            {
+                method:'PATCH',
+                headers: {
+                    "Content-Type":"application/json",
+                },
+                body: JSON.stringify(""),
+            }
+        )
+        .then(response => {
+            if(response.ok){
+                response.json()
+                .then(newOrderData => {
+                    setOrder(newOrderData)
+                    setOrderItems(newOrderData.order_items)
+                    navigate('/')
+                })
+            }
+            else {
+                response.json()
+                .then(error => setError(error))
+            }
+        })
+    }
+
     if(!order) return <div>Loading Photos in Cart...</div>
 
     if(!orderItem) return (
         <div>
             <OrderItemList orderItems={orderItems} handleSetOrderItem={handleSetOrderItem} handleSetOrderItems={handleSetOrderItems}/>
+            <Container fluid>
+            <Row className="pb-3 d-flex justify-content-center">
+                <Col className="text-center">
+                    <Button onClick={()=>handlePlaceOrder()}>Place Order</Button>
+                </Col>
+            </Row>
+        </Container>
         </div>
     )
 
