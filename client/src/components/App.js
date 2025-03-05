@@ -7,6 +7,7 @@ import HomePage from './HomePage.js'
 import EditAccount from "./EditAccount.js"
 import PhotoShootDetailView from "./PhotoShootDetailView.js"
 import CartPage from "./CartPage.js"
+import OrderDetailView from "./OrderDetailView.js"
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import OrdersPage from "./OrdersPage.js"
@@ -49,7 +50,7 @@ function App() {
       <Route path="/edit_account" element={<EditAccount updateUser={updateUser} user={user} />} />
       <Route path="/cart" element={<CartPage updateUser={updateUser} />} />
       <Route path="/orders" element={<OrdersPage updateUser={updateUser} user={user} />} />
-      <Route path="/orders/:id" />
+      <Route path="/orders/:id" element={<OrderDetailView updateUser={updateUser} user={user} />}/>
     </Routes>
     </>
   )
